@@ -3,11 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>معلّم برو</title>
+  <meta name="description" content="معلّم برو — مكتبة برومبتات عملية مرتبة حسب حاجة المعلم" />
+  <title>معلّم برو | مكتبة برومبتات للمعلمين</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/src/styles.css" />
 </head>
 <body>
-  <h1>معلّم برو</h1>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1 class="logo">معلّم برو</h1>
+        <p class="tagline">مكتبة برومبتات عملية مرتبة حسب حاجة المعلم</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" aria-label="مقدمة">
+      <p class="hero-text">
+        اختر برومبتًا جاهزًا، انسخه، وعدّل العناصر بين الأقواس المزدوجة حسب درسك.
+        مساعد مستقل غير رسمي — غير تابع لوزارة التعليم.
+      </p>
+    </section>
+
+    <section class="toolbar" aria-label="بحث وتصفية">
+      <label class="search-wrap" for="searchInput">
+        <span class="sr-only">بحث</span>
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="ابحث بالعنوان أو الوسم أو الحاجة..."
+          autocomplete="off"
+        />
+      </label>
+      <div id="categoryChips" class="chips" role="list" aria-label="تصفية حسب الفئة"></div>
+    </section>
+
+    <section aria-label="قائمة البرومبتات">
+      <p id="resultsMeta" class="results-meta"></p>
+      <div id="promptsGrid" class="prompts-grid"></div>
+      <p id="emptyState" class="empty-state hidden">لا توجد نتائج مطابقة. جرّب كلمة أخرى أو فئة مختلفة.</p>
+    </section>
+
+    <section id="converter" class="converter" aria-label="حوّل طلبك إلى برومبت">
+      <h2>حوّل طلبك إلى برومبت</h2>
+      <p class="converter-desc">
+        اكتب طلبك بكلماتك، وسنحوّله إلى برومبت منظّم (دور / مدخلات / مطلوب / قيود / شكل المخرج).
+        لن نخترع أسماءً أو درجات أو تعاميم غير مذكورة.
+      </p>
+      <label for="converterInput" class="sr-only">اكتب طلبك</label>
+      <textarea
+        id="converterInput"
+        rows="5"
+        placeholder="مثال: أحتاج تحضير درس رياضيات للصف الخامس عن الكسور خلال 45 دقيقة..."
+      ></textarea>
+      <button type="button" id="convertBtn" class="btn btn-primary">حوّل إلى برومبت</button>
+      <div id="converterOutput" class="converter-output hidden">
+        <pre id="converterResult"></pre>
+        <button type="button" id="copyConverterBtn" class="btn btn-secondary">نسخ البرومبت</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        <strong>إخلاء مسؤولية:</strong>
+        معلّم برو أداة مساعدة مستقلة غير رسمية، وغير تابعة لوزارة التعليم ولا لأي جهة حكومية.
+        لا تستخدم شعارات رسمية، ولا تمثّل سياسات أو تعاميم وزارية.
+        راجع دائمًا مخرجات الذكاء الاصطناعي قبل الاعتماد عليها في العمل الرسمي.
+      </p>
+      <p class="footer-copy">معلّم برو — للاستخدام التعليمي الشخصي</p>
+    </div>
+  </footer>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-panel">
+      <header class="modal-header">
+        <h2 id="modalTitle"></h2>
+        <button type="button" class="icon-btn" data-close-modal aria-label="إغلاق">×</button>
+      </header>
+      <div class="modal-meta">
+        <span id="modalCategory" class="badge"></span>
+        <p id="modalNeed" class="modal-need"></p>
+      </div>
+      <pre id="modalPrompt" class="modal-prompt"></pre>
+      <footer class="modal-actions">
+        <button type="button" id="copyPromptBtn" class="btn btn-primary">نسخ البرومبت</button>
+        <button type="button" class="btn btn-ghost" data-close-modal>إغلاق</button>
+      </footer>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite">تم النسخ</div>
+
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>
